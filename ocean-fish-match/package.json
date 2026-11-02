@@ -1,0 +1,11 @@
+{
+  "name": "shenHaiXiaochu",
+  "uuid": "d88fe77b-4933-4107-9f56-1348f1c3b9ad",
+  "creator": {
+    "version": "3.8.8"
+  },
+  "dependencies": {
+    "@alipay/faas-web-sdk": "^1.1.25",
+    "miniprogram-api-typings": "^4.0.1"
+  }
+}

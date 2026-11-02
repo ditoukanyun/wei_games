@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-02",
+  "texturesReplaced": 58,
+  "viewports": [
+    [
+      375,
+      667
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "checks": [
+    "loading/home/board/settings/rewards visual QA",
+    "consecutive eliminations update score",
+    "target-score boundaries and duplicate settlement guard tests",
+    "scene/prefab references valid",
+    "atlas frame coordinates fit"
+  ],
+  "productionPending": false,
+  "verifiedPublishedFiles": 27,
+  "url": "http://118.145.223.121/game/ocean-fish-match/",
+  "backup": "/var/backups/ocean-fish-match/before-aquarium-20261102-082614"
+}

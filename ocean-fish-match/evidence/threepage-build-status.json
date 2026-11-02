@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "url": "http://118.145.223.121/game/ocean-fish-match/?v=responsive-20261102",
+  "verifiedFiles": 261,
+  "scenes": 3,
+  "scriptsBytes": 86885,
+  "viewportsVisuallyChecked": [
+    [
+      375,
+      667
+    ],
+    [
+      360,
+      800
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      414,
+      896
+    ]
+  ],
+  "mathAlsoChecked": [
+    [
+      768,
+      1024
+    ]
+  ],
+  "otherGamesUnchanged": true,
+  "backup": "/var/backups/ocean-fish-match/before-responsive-20261102-195855",
+  "creator": "/Users/wei/Applications/CocosCreator-Verified.app"
+}

@@ -1,0 +1,34 @@
+
+鱼3.png
+size: 503,231
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+右下鳍
+  rotate: false
+  xy: 335, 21
+  size: 98, 94
+  orig: 100, 96
+  offset: 1, 1
+  index: -1
+尾巴
+  rotate: false
+  xy: 335, 117
+  size: 166, 112
+  orig: 169, 114
+  offset: 2, 1
+  index: -1
+左下鳍
+  rotate: true
+  xy: 435, 32
+  size: 83, 52
+  orig: 85, 54
+  offset: 1, 1
+  index: -1
+身子
+  rotate: false
+  xy: 2, 2
+  size: 331, 227
+  orig: 334, 229
+  offset: 1, 1
+  index: -1

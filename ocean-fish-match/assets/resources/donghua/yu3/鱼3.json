@@ -1,0 +1,71 @@
+{
+"skeleton": {
+	"hash": "s2o1PKuKICiUuFzcPUTh8LShz28",
+	"spine": "3.8.75",
+	"x": -165.82,
+	"y": -3.31,
+	"width": 477,
+	"height": 252,
+	"images": "D:/桌面/小游戏UI/海底萌鱼消除/动画/images/",
+	"audio": "D:\\桌面\\小游戏UI\\海底萌鱼消除\\动画"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "length": 116.08, "rotation": -2.46, "x": -1.43, "y": 130.82 },
+	{ "name": "bone2", "parent": "bone", "length": 124.86, "rotation": -0.4, "x": 151.39, "y": -8.47 },
+	{ "name": "bone3", "parent": "bone", "length": 90.45, "rotation": -38.92, "x": 46.19, "y": -45.35 },
+	{ "name": "bone4", "parent": "bone", "length": 50.45, "rotation": -29.45, "x": -34.94, "y": -95.75 }
+],
+"slots": [
+	{ "name": "左下鳍", "bone": "bone4", "attachment": "左下鳍" },
+	{ "name": "尾巴", "bone": "bone2", "attachment": "尾巴" },
+	{ "name": "身子", "bone": "bone", "attachment": "身子" },
+	{ "name": "右下鳍", "bone": "bone3", "attachment": "右下鳍" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"身子": {
+				"身子": { "x": 2.46, "y": 3.47, "rotation": 2.46, "width": 334, "height": 229 }
+			},
+			"左下鳍": {
+				"左下鳍": { "x": 27.34, "y": 1.74, "rotation": 31.91, "width": 85, "height": 54 }
+			},
+			"右下鳍": {
+				"右下鳍": { "x": 59, "y": 0.21, "rotation": 41.38, "width": 100, "height": 96 }
+			},
+			"尾巴": {
+				"尾巴": { "x": 77.73, "y": -8.3, "rotation": 2.86, "width": 169, "height": 114 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"bones": {
+			"bone4": {
+				"rotate": [
+					{},
+					{ "time": 0.6667, "angle": -31.06 },
+					{ "time": 1.3333 }
+				]
+			},
+			"bone3": {
+				"rotate": [
+					{},
+					{ "time": 0.6667, "angle": -32.44 },
+					{ "time": 1.3333 }
+				]
+			},
+			"bone2": {
+				"scale": [
+					{},
+					{ "time": 0.6667, "x": 0.766 },
+					{ "time": 1.3333 }
+				]
+			}
+		}
+	}
+}
+}

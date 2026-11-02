@@ -1,0 +1,12 @@
+{
+  "status": "complete",
+  "url": "http://118.145.223.121/game/ocean-fish-match/?v=gloss-20261102",
+  "verifiedFiles": 261,
+  "changes": [
+    "equal centered reward buttons",
+    "square music sprite bounds",
+    "soft glossy home buttons"
+  ],
+  "otherGamesUnchanged": true,
+  "backup": "/var/backups/ocean-fish-match/before-gloss-20261102-200844"
+}

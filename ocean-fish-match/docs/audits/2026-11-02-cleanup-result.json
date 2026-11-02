@@ -1,0 +1,88 @@
+{
+  "deleted": [
+    {
+      "path": "assets/res/loadingUI/2@2x.png",
+      "bytes": 185685
+    },
+    {
+      "path": "assets/res/loadingUI/游戏努力加载中...@2x.png",
+      "bytes": 3293
+    },
+    {
+      "path": "assets/resources/UI/评分/锤子@2x.png",
+      "bytes": 4397
+    },
+    {
+      "path": "assets/resources/UI/评分/换色@2x.png",
+      "bytes": 4278
+    },
+    {
+      "path": "assets/res/loadingUI/2@2x.png.meta",
+      "bytes": 2901
+    },
+    {
+      "path": "assets/res/loadingUI/游戏努力加载中...@2x.png.meta",
+      "bytes": 2994
+    },
+    {
+      "path": "assets/resources/UI/评分/锤子@2x.png.meta",
+      "bytes": 2974
+    },
+    {
+      "path": "assets/resources/UI/评分/换色@2x.png.meta",
+      "bytes": 2974
+    },
+    {
+      "path": "art/originals",
+      "bytes": 4429372
+    },
+    {
+      "path": "art/threepage-originals/script",
+      "bytes": 15308
+    },
+    {
+      "path": "library-before-threepage-1793580549",
+      "bytes": 13688873
+    },
+    {
+      "path": "library-reimport-1793580637",
+      "bytes": 12896532
+    },
+    {
+      "path": "build/web-mobile-unverified-1793619641",
+      "bytes": 3104371
+    },
+    {
+      "path": "deploy/game.scene.before-layout",
+      "bytes": 302384
+    },
+    {
+      "path": "tools/build_aquarium_art.py",
+      "bytes": 11641
+    },
+    {
+      "path": "tools/apply_aquarium_layout.py",
+      "bytes": 3299
+    }
+  ],
+  "updated_references": [
+    "assets/scene/loading.scene",
+    "assets/bundles/Prefabs/guliPop/hammerTishi.prefab",
+    "assets/bundles/Prefabs/guliPop/changeTishi.prefab",
+    "art/threepage-originals/scene/loading.scene"
+  ],
+  "bytes_removed": 34661276,
+  "retained": [
+    "art/source",
+    "art/threepage-originals/scene",
+    "art/threepage-originals/bundles",
+    "library",
+    "temp",
+    "build/web-mobile"
+  ],
+  "verification": {
+    "h5_build": "passed",
+    "regression_tests": "all five scripts passed",
+    "deployed": false
+  }
+}

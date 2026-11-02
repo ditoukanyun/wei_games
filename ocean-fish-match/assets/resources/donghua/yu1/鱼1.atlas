@@ -1,0 +1,27 @@
+
+鱼1.png
+size: 583,255
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+尾巴
+  rotate: true
+  xy: 430, 127
+  size: 126, 105
+  orig: 128, 107
+  offset: 1, 1
+  index: -1
+身体
+  rotate: false
+  xy: 2, 2
+  size: 426, 251
+  orig: 428, 253
+  offset: 1, 1
+  index: -1
+鱼翅
+  rotate: true
+  xy: 537, 90
+  size: 163, 44
+  orig: 165, 46
+  offset: 1, 1
+  index: -1
