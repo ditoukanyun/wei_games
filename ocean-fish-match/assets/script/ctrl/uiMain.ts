@@ -76,6 +76,7 @@ export class uiMain extends Component {
         }
         // 增加当前关卡已获得的分数
         gameConfig.score += score
+        save('bestScore', Math.max(Number(load('bestScore')) || 0, gameConfig.score))
         // 更新分数
         this.initScore()
     }
@@ -177,7 +178,7 @@ export class uiMain extends Component {
    */
     restBtn() {
         console.log('重置道具');
-        if (!gameConfig.IsGameStart) return
+        if (!gameConfig.IsGameStart || !this.FactoryItem._IsTouch) return
         this.CancelProps()
         if (gameConfig.restNum > 0 && gameConfig.touchState == '') {
             this.FactoryItem.PropsRest()
@@ -200,7 +201,7 @@ export class uiMain extends Component {
     }
     hammerBtn() {
         console.log('消除一个');
-        if (!gameConfig.IsGameStart) return
+        if (!gameConfig.IsGameStart || !this.FactoryItem._IsTouch) return
         if (gameConfig.touchState === '1') {
             this.CancelProps()
             return
@@ -226,7 +227,7 @@ export class uiMain extends Component {
     }
     changeBtn() {
         console.log('更换颜色');
-        if (!gameConfig.IsGameStart) return
+        if (!gameConfig.IsGameStart || !this.FactoryItem._IsTouch) return
         if (gameConfig.touchState === '2') {
             this.CancelProps()
             return

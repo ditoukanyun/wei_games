@@ -1,6 +1,8 @@
 import { _decorator, assetManager, Component, ImageAsset, instantiate, Label, Node, Prefab, resources, ScrollView, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec3 } from 'cc';
 import { donghuaTs } from '../ctrl/donghuaTs';
-import { rankData } from '../data/enume';
+import { local } from '../data/enume';
+import { load, save } from '../unitls/tools';
+import { gameConfig } from '../data/gameConfig';
 const { ccclass, property } = _decorator;
 const wx = window['wx'];
 
@@ -32,6 +34,14 @@ export class rankPopTs extends Component {
         this.content.removeAllChildren()
         // 滚动视图滚动到顶部
         this.scrollView.scrollToTop(0);
+        // 本机最高分；没有远端服务时不伪造其他玩家。
+        this.playId = 'local-player';
+        this.index = null;
+        const score = Math.max(Number(load('bestScore')) || 0, gameConfig.score || 0, Number(load(local.LastScore)) || 0);
+        save('bestScore', score);
+        const user = load(local.userInfo, 2) || {};
+        const me = { playerId: this.playId, playerInfo: { avatarUrl: user.avatarUrl || '', nickName: user.nickName || '我（本机）' }, score: String(score) };
+        const rankData = score > 0 ? [me] : [];
         // 获取数据后更新滚动视图高度
         let hei = (100 + 0) * rankData.length
         this.content.getComponent(UITransform).setContentSize(513, hei)
@@ -44,7 +54,7 @@ export class rankPopTs extends Component {
                 this.updateRankList(rankList[i], i)
             }
         }
-        this.updateUseScore(rankData[1], 1)
+        this.updateUseScore(me, this.index)
     }
     /**
     * 更新个人排名
@@ -52,7 +62,9 @@ export class rankPopTs extends Component {
     updateUseScore(data?, index?) {
         // 获取个人分数节点
         let node = this.node.getChildByPath('popUI/PlayerItem')
-        if (index !== null) {
+        node.getChildByName('rank').active = index != null && index < 3;
+        node.getChildByName('rankLabel').getComponent(Label).string = '';
+        if (index != null) {
             switch (index) {
                 // 根据排行榜项的索引设置排名图标
                 case 0: this.loadResourceSprite(node.getChildByName('rank').getComponent(Sprite), 'pop/排行/1/spriteFrame')
@@ -62,15 +74,15 @@ export class rankPopTs extends Component {
                 case 2: this.loadResourceSprite(node.getChildByName('rank').getComponent(Sprite), 'pop/排行/3/spriteFrame')
                     break;
                 default: node.getChildByName('rankLabel').getComponent(Label).string = String(index + 1)
-                    node.removeChild(node.getChildByName('rank'));
+                    node.getChildByName('rank').active = false;
                     break;
             }
         } else {
             node.getChildByName('rankLabel').getComponent(Label).string = '未上榜'
-            node.removeChild(node.getChildByName('rank'));
+            node.getChildByName('rank').active = false;
         }
         // 通过请求远端服务器获取图像
-        if (data) {
+        if (data?.playerInfo.avatarUrl) {
             assetManager.loadRemote<ImageAsset>(data.playerInfo.avatarUrl, { ext: '.png' }, (err, imageAsset) => {
                 if (err) {
                     console.log('加载远程图片失败');
@@ -89,9 +101,9 @@ export class rankPopTs extends Component {
             node.getChildByPath("scoreNode/score").getComponent(Label).string = data.score;
         } else {
             // 设置玩家昵称标签的文本。
-            node.getChildByPath("userInfo/name").getComponent(Label).string = "神秘用户";
+            node.getChildByPath("userInfo/name").getComponent(Label).string = data?.playerInfo.nickName || "我（本机）";
             //设置分数标签的文本
-            node.getChildByPath("scoreNode/score").getComponent(Label).string = '0';
+            node.getChildByPath("scoreNode/score").getComponent(Label).string = data?.score || '0';
         }
     }
     /**
@@ -114,7 +126,7 @@ export class rankPopTs extends Component {
             case 2: this.loadResourceSprite(node.getChildByName('rank').getComponent(Sprite), 'pop/排行/3/spriteFrame')
                 break;
             default: node.getChildByName('rankLabel').getComponent(Label).string = String(index + 1)
-                node.removeChild(node.getChildByName('rank'));
+                node.getChildByName('rank').active = false;
                 break;
         }
         // 通过请求远端服务器获取图像
@@ -133,7 +145,7 @@ export class rankPopTs extends Component {
             });
         }
         // 如果当前排行榜项是当前玩家的信息，则设置玩家信息
-        if (data && data.playerId == this.playId) {
+        if (data && this.playId != null && data.playerId === this.playId) {
             // 设置玩家昵称标签的文本。
             node.getChildByPath("userInfo/name").getComponent(Label).string = data.playerInfo.nickName || "我";
             // 加载背景资源并设置到背景精灵组件上。

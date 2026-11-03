@@ -383,7 +383,7 @@ export class FactoryItem extends Component {
         var self = this;
         this.scheduleOnce(function () {
             var isleftAni = self.LeftClear();
-            var timer = isleftAni == true ? 0.1 : 0;
+            var timer = isleftAni == true ? 0.3 : 0;
             self.scheduleOnce(function () {
                 // 检查游戏是否完成
                 self.IsDeath();
@@ -580,6 +580,8 @@ export class FactoryItem extends Component {
      * 元素刷新对游戏中的垂直列表进行随机重排，并更新每个项目的颜色和位置
      */
     PropsRest() {
+        if (!this._IsTouch || !this.IsGameStart || this.isGameOver) return;
+        this._IsTouch = false;
         this.StopPromptAnimation();
         // 存储索引
         var IndexList = [];
@@ -641,7 +643,10 @@ export class FactoryItem extends Component {
         }
         this.setItemXY();
         this.isReset = true;
-        this.IsDeath();
+        this.scheduleOnce(() => {
+            this.IsDeath();
+            this._IsTouch = this.IsGameStart && !this.isGameOver;
+        }, 0.5);
     }
 
     /**
@@ -651,7 +656,7 @@ export class FactoryItem extends Component {
     HammerProps(Item) {
         this._CheckItem.push(Item);
         Item.getComponent("Item")._isDestory = true;
-        this.ClearCheckItem();
+        this.ClearCheckItem(10);
         gameConfig.touchState = "";
     }
     /**

@@ -112,7 +112,7 @@ export class Item extends Component {
                 console.log('金币不够');
             }
         }
-        this.FactoryItem._IsTouch = true;
+
     }
     /**
    * 使用道具更换一个元素的颜色类型

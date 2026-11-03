@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const root = 'ocean-fish-match/assets/script/';
+const rank = fs.readFileSync(root+'perfabs/rankPopTs.ts','utf8');
+assert(!rank.includes('updateUseScore(rankData[1], 1)'));
+assert(rank.includes('data.playerId === this.playId'));
+const item = fs.readFileSync(root+'perfabs/Item.ts','utf8');
+assert(!item.slice(item.indexOf('TouchHammer(item)'), item.indexOf('TouchChange(item)')).includes('_IsTouch = true'));
+const ui = fs.readFileSync(root+'ctrl/uiMain.ts','utf8');
+assert(ui.includes('!this.FactoryItem._IsTouch'));
+console.log('ranking and input regressions passed');
