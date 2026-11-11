@@ -1,1 +1,24 @@
+# OS
 .DS_Store
+
+# Cocos Creator 可再生成产物（打开编辑器/构建时自动重建）
+library/
+temp/
+local/
+build/
+profiles/
+native/
+
+# NPM
+node_modules/
+
+# Python 工具链
+__pycache__/
+*.pyc
+
+# 构建日志
+*.log
+
+# IDE
+.vscode/
+.idea/
