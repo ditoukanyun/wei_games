@@ -1,0 +1,75 @@
+{
+  "__version__": "3.0.7",
+  "builder": {
+    "options": {
+      "web-desktop": {
+        "configID": "437dad",
+        "services": []
+      },
+      "wechatgame": {
+        "configID": "437dad",
+        "services": []
+      },
+      "bytedance-mini-game": {
+        "configID": "437dad",
+        "services": []
+      }
+    },
+    "taskOptionsMap": {
+      "1723514233223": {
+        "configID": "437dad",
+        "services": []
+      },
+      "1730042821503": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1730335029139": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1730335463285": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1730713934777": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1731035274110": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1731038411831": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1731038623207": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1731928526642": {
+        "configID": "437dad",
+        "services": [],
+        "__version__": "3.0.7"
+      },
+      "1734181474211": {
+        "configID": "437dad",
+        "services": []
+      }
+    },
+    "__version__": "1.3.7"
+  },
+  "builder-options": {
+    "configID": "437dad",
+    "services": [],
+    "__version__": "3.0.7"
+  }
+}

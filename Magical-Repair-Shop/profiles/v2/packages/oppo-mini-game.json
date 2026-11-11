@@ -1,0 +1,11 @@
+{
+  "__version__": "1.0.3",
+  "builder": {
+    "common": {
+      "buildPath": "project://build",
+      "outputName": "oppo-mini-game",
+      "mainBundleCompressionType": "merge_dep",
+      "platform": "oppo-mini-game"
+    }
+  }
+}
