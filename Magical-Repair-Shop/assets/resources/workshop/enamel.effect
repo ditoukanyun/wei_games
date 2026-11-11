@@ -1,0 +1,121 @@
+// Copyright (c) 2017-2020 Xiamen Yaji Software Co., Ltd.
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: sprite-vs:vert
+      frag: sprite-fs:frag
+      depthStencilState:
+        depthTest: false
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      rasterizerState:
+        cullMode: none
+      properties:
+        alphaThreshold: { value: 0.5 }
+}%
+
+CCProgram sprite-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #if USE_LOCAL
+    #include <builtin/uniforms/cc-local>
+  #endif
+  #if SAMPLE_FROM_RT
+    #include <common/common-define>
+  #endif
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+
+  out vec4 color;
+  out vec2 uv0;
+
+  vec4 vert () {
+    vec4 pos = vec4(a_position, 1);
+
+    #if USE_LOCAL
+      pos = cc_matWorld * pos;
+    #endif
+
+    #if USE_PIXEL_ALIGNMENT
+      pos = cc_matView * pos;
+      pos.xyz = floor(pos.xyz);
+      pos = cc_matProj * pos;
+    #else
+      pos = cc_matViewProj * pos;
+    #endif
+
+    uv0 = a_texCoord;
+    #if SAMPLE_FROM_RT
+      CC_HANDLE_RT_SAMPLE_FLIP(uv0);
+    #endif
+    color = a_color;
+
+    return pos;
+  }
+}%
+
+CCProgram sprite-fs %{
+  precision highp float;
+  #include <builtin/internal/embedded-alpha>
+  #include <builtin/internal/alpha-test>
+
+  in vec4 color;
+
+  #if USE_TEXTURE
+    in vec2 uv0;
+    #pragma builtin(local)
+    layout(set = 2, binding = 12) uniform sampler2D cc_spriteTexture;
+  #endif
+
+  vec4 frag () {
+    vec4 o = vec4(1, 1, 1, 1);
+
+    #if USE_TEXTURE
+      o *= CCSampleWithAlphaSeparated(cc_spriteTexture, uv0);
+      #if IS_GRAY
+        float gray  = 0.2126 * o.r + 0.7152 * o.g + 0.0722 * o.b;
+        o.r = o.g = o.b = gray;
+      #endif
+    #endif
+
+    #if USE_TEXTURE
+      // Reuse only the silhouette alpha; painted enamel replaces the legacy RGB.
+      vec2 texel = vec2(0.00049116, 0.00055804);
+      float up = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0 - vec2(0.0, texel.y * 4.0)).a;
+      float down = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0 + vec2(0.0, texel.y * 4.0)).a;
+      float left = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0 - vec2(texel.x * 4.0, 0.0)).a;
+      float right = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0 + vec2(texel.x * 4.0, 0.0)).a;
+      float edge = 1.0 - min(min(up, down), min(left, right));
+      float grain = fract(sin(dot(uv0 * 1230.0, vec2(12.9898,78.233))) * 43758.5453);
+      // Broad reflection and a soft shoulder make the enamel read as a coated surface.
+      // Keep the same five texture reads; highlights are procedural and shared by all plates.
+      float reflection = pow(max(0.0, sin(uv0.x * 22.0 + uv0.y * 17.0 + 0.7)), 14.0);
+      float shoulder = pow(max(0.0, sin(uv0.x * 11.0 - uv0.y * 15.0 + 1.1)), 4.0);
+      float bevelLight = clamp(down - up + right - left, -1.0, 1.0);
+      float grainLight = (grain - 0.5) * 0.012;
+      vec3 enamel = color.rgb * (0.86 + shoulder * 0.16 + grainLight);
+      enamel = mix(enamel, vec3(1.0, 0.97, 0.86), reflection * 0.26);
+      vec3 brass = vec3(0.73, 0.49, 0.21) + bevelLight * vec3(0.25, 0.24, 0.18);
+      #if SCREW_SURFACE
+        float value = dot(o.rgb, vec3(0.2126, 0.7152, 0.0722));
+        enamel = color.rgb * (value * 1.55) + vec3(max(0.0, value - 0.75) * 0.55);
+      #endif
+      o.rgb = mix(enamel, brass, smoothstep(0.05, 0.80, edge));
+      // Hidden-layer silhouettes must read as shadows, without metal rims or reflections.
+      if (max(color.r, max(color.g, color.b)) < 0.01) {
+        o.rgb = vec3(0.12, 0.075, 0.04);
+      }
+      o.a *= color.a;
+    #else
+      o *= color;
+    #endif
+    ALPHA_TEST(o);
+    return o;
+  }
+}%
