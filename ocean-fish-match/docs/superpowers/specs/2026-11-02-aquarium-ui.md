@@ -1,2 +1,0 @@
-# Aquarium UI redesign
-Approved direction: the generated soft 3D aquarium concept, including all-new five characters, sunlit underwater backgrounds, pearl panels, teal/coral/lavender buttons and shell/hammer/pearl tools. Preserve rules, saves and target-score fix. Replace loading, home, game and popup artwork; make mobile HUD compact and keep full board visible. Existing atlas references may be preserved with regenerated textures; no unrelated gameplay changes. Initial delivery is a locally built playable preview. Production update follows verified visual QA.

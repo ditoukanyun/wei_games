@@ -1,7 +1,7 @@
 {
   "__version__": "1.3.9",
   "log": {
-    "level": 4
+    "level": 1
   },
   "common": {
     "polyfills": {
@@ -23,6 +23,7 @@
         "state": "success",
         "stage": "build",
         "message": "2024-12-15 10:20:27 build success in 17 s!",
+        "detailMessage": "",
         "options": {
           "name": "shenHaiXiaochu",
           "server": "",
@@ -87,6 +88,7 @@
         "state": "success",
         "stage": "build",
         "message": "2024-12-15 00:11:11 build success in 15 s!",
+        "detailMessage": "",
         "options": {
           "name": "shenHaiXiaochu",
           "server": "",
